@@ -15,7 +15,7 @@ def reset(request):
   request.session['ingredients_list'] = []
   return redirect("/")
 
-
+# test
 
 # help functions
 
