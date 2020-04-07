@@ -8,7 +8,6 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
       <title>Recipe Finder</title>
       {% load static %}
     </head>
@@ -29,7 +28,7 @@
         <div class="row">
           <div class="input-field col s6">
             <input id="input_text" type="text" data-length="10" name='ingredient'>
-            <label for="input_text">Ingredient</label>
+            <label for="input_text">Ingredient:</label>
           </div>
         </div>
         <button type='submit' class="waves-effect waves-light btn">Add</button>
@@ -39,7 +38,7 @@
       <table>
           <thead>
             <tr>
-                <th>Ingredients</th>
+                <th>Your ingredients:</th>
             </tr>
           </thead>
 
@@ -51,6 +50,31 @@
             {% endfor %}
           </tbody>
       </table>
+      {% endif %}
+      {% if request.session.cards_list %}
+        <div class="row valign-wrapper">
+        {% for card in request.session.cards_list %}
+            <div class="col s12 m4">
+              <div class="card">
+                <div class="card-image">
+                  <img src={{card.image}}>
+                  <span class="card-title">{{card.title}}</span>
+                </div>
+                <div class="card-content">
+                  <h5>Additional ingredients:</h5>
+                  <ul>
+                    {% for ingredient in card.additionalIngr %}
+                      <li>{{ingredient}}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <a href={{card.url}}>Link</a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
       {% endif %}
       <!--JavaScript at end of body for optimized loading-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
